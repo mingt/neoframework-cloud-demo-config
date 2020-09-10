@@ -1,0 +1,47 @@
+mail:
+  domain: gmail.com
+
+environment:
+  name: local
+
+hazelcast:
+  # 注释掉 tcpIpConfig 部分或设置其 enabled 为 false 则使用默认的 multicast
+  tcpIpConfig:
+    enabled: false
+    requiredMember: 127.0.0.1
+    # 192.168.1.199, 192.168.1.209
+    members: 127.0.0.1
+  groupConfig:
+    name: prod
+  managementCenterConfig:
+    enabled: true
+    url: http://127.0.0.1:10086/mancen
+
+spring:
+  cloud:
+    config:
+      # 支持命令行等属性覆盖
+      allowOverride: true
+      overrideNone: true
+      overrideSystemProperties: false
+  redis:
+    host: 127.0.0.1
+    # host: 192.168.3.208 #勿随便改，大多数因安全考虑只能本地访问
+    port: 6379
+    pool:
+      max-idle: 16
+      min-idle: 0
+      max-active: 16
+      max-wait: -1
+
+# RabbitMQ + stomp
+stomp:
+    # 留空表示不使用外部Broker，默认为SimpleBroker。可用值有：rabbitmq，未来可有 rocketmq 等
+    externalBroker:
+    # server: localhost
+    server: 192.168.3.208
+    port: 61613
+    # guest / guest
+    username: testdemows
+    password: 111222
+
